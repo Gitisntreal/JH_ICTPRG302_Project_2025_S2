@@ -115,6 +115,33 @@ End For
 
 
 # TODO: Read File Into Word List Function
+def read_words_into__list(filename):
+    """ Reads the target words file and store them in a list.
+  Arguments
+    ---------
+    filename : str
+    the name/path of text file in which contains word to be read.
+    
+    Returns:
+    -------
+    list
+        a list in which contains the target words from the file.
+        
+    Examples
+    --------
+    # print(word_list)
+    [aback, abase, abate, abbey, abbot]
+    """
+    word_list = read_words_into__list('target_words.txt')
+    word_list = []
+    with open(filename, 'r') as file:
+        for line in file:
+            word = line.strip()
+            word_list.append(word)
+    return word_list
+    
+    
+    
 
 # TODO: Display Greeting Function
 def show_greeting():
