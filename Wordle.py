@@ -139,6 +139,14 @@ def read_words_into__list(filename):
             word = line.strip()
             word_list.append(word)
     return word_list
+
+# Test Case 4
+## Arrange
+all_word_filename = "all_words.txt"
+## Act
+all_word_list = read_words_into__list(all_word_filename)
+## Assert
+print("Got:", all_word_list[:5], "Expected:", ['aahed', 'aalii', 'aargh', 'aarti', 'abaca'])
     
     
     
