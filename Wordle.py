@@ -17,6 +17,37 @@
 # TODO: Score Guess Function
 # Jason Huynh 20134959 - 5/11/2025
 def score_guess(guess, target):
+    """ This function is used to detect the letters within guess word (inputted by player).
+    At base it will give a score 0 to all the letters then set the score of 2 if the letter is in the correct position of the target word.
+    If the score is still set at 0 and the guess letter is within the target word then it will set a score 1.
+        Arguments
+        ---------
+        guess : str
+        the word that is guessed by the player
+        target : str
+        targeted word that needs to be guessed
+        Returns:
+        -------
+        list
+        2 = exact match of target word ( correct letter and position)
+        1 = matched letter within the target word but misplaced (correct letter)
+        0 = no match (letter is not in target word)
+        
+        Examples
+        --------
+        guess_word = 'hello'
+        target_word = 'train'
+        score = score_guess(guess_word, target_word)
+        print('Score:', score, 'Expected:', [0, 0, 0, 0, 0])
+        #output
+        [0, 0, 0, 0, 0][0, 0, 0, 0, 0]
+        guess_word = 'world'
+        target_word = 'hello'
+        score = score_guess(guess_word, target_word)
+        print('Score:', score, 'Expected:', [0, 0, 0, 0, 0])
+        #output
+        [0, 1, 0, 2, 0][2, 2, 2, 2, 2]
+        """
     score = [0] * len(target)
     target_letter = list(target)
     for i in range(len(target)):
@@ -80,9 +111,6 @@ Start:
 End For
     Return Score
 :End
-
-
-
 """
 
 
