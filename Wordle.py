@@ -125,14 +125,14 @@ def read_words_into__list(filename):
     Returns:
     -------
     list
-        a list in which contains the target words from the file.
+        a list that contains all words in read mode from t he file.
         
     Examples
     --------
+    # word_list read_words_into_list('target_words.txt)
     # print(word_list)
     [aback, abase, abate, abbey, abbot]
     """
-    word_list = read_words_into__list('target_words.txt')
     word_list = []
     with open(filename, 'r') as file:
         for line in file:
