@@ -157,6 +157,10 @@ target_word_list = read_words_into_list(target_word_filename)
 #TODO: Create the statement to show the last 5 words and check that they are correct
 ## Assert
 print("Got:", target_word_list[:5], "Expected:", ['aback', 'abase', 'abate', 'abbey', 'abbot'])
+
+#Creating a random word fucntion
+def random_target_word:
+    
     
     
     
