@@ -115,7 +115,7 @@ End For
 
 
 # TODO: Read File Into Word List Function
-def read_words_into__list(filename):
+def read_words_into_list(filename):
     """ Reads the target words file and store them in a list.
   Arguments
     ---------
@@ -144,9 +144,19 @@ def read_words_into__list(filename):
 ## Arrange
 all_word_filename = "all_words.txt"
 ## Act
-all_word_list = read_words_into__list(all_word_filename)
+all_word_list = read_words_into_list(all_word_filename)
 ## Assert
 print("Got:", all_word_list[:5], "Expected:", ['aahed', 'aalii', 'aargh', 'aarti', 'abaca'])
+
+# Test Case 5
+## Arrange
+target_word_filename = "target_words.txt"
+## Act
+target_word_list = read_words_into_list(target_word_filename)
+## Assert
+#TODO: Create the statement to show the last 5 words and check that they are correct
+## Assert
+print("Got:", target_word_list[:5], "Expected:", ['aback', 'abase', 'abate', 'abbey', 'abbot'])
     
     
     
