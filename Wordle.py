@@ -159,12 +159,45 @@ target_word_list = read_words_into_list(target_word_filename)
 print("Got:", target_word_list[:5], "Expected:", ['aback', 'abase', 'abate', 'abbey', 'abbot'])
 
 #Creating a random word fucntion
-def random_target_word:
+import random
+def random_target_word(random_word_list):
+    """ 
+    select a random word within the targeted word list variable and return it.
+  Arguments
+    ---------
+    word_;ist : list
+        A list of containing all the targetted word taht they player must guess.
     
-    
-    
-    
+    Returns:
+    -------
+    str
+        a randomly selected word from the target words list.
 
+        
+    Examples
+    --------
+    # target_words = ['aback', 'abase', 'abate', 'abbey', 'abbot']
+    # random_word(words)
+    output: 'abase'
+    """
+    # TODO: Count the words in the word list
+    word_count = len(random_word_list)
+    # TODO: Select a random number between 0 and the number of words in the list
+    random_list = random.randint(0, word_count - 1)
+    # TODO: Return the word at the random number's position
+    return random_word_list[random_list]
+
+# Test Case 6
+# TODO: Set list of words to ["apple", "banana", "cherry"]
+words = ['apple', 'banana', 'cherry']
+for word_count in range(5):
+    # TODO: Call random word with the list of words
+    targetted_word = random_target_word(words)
+    # TODO: Display the randomly selected word
+    print('Random targetted words:', targetted_word)
+ 
+    
+    
 # TODO: Display Greeting Function
 def show_greeting():
     print("Welcome")
