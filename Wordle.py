@@ -7,7 +7,7 @@
 # Lecturer: Chris
 
 # TODO: Add Import statements (if needed)
-DEBUG = True
+DEBUG = False
 # Variables and Constants
 # TODO: Define Constants
 # definition: it is a value in which does not change, where they stay the same throughout the program
@@ -135,11 +135,11 @@ def read_words_into_list(filename):
     Returns:
     -------
     list
-        a list that contains all words in read mode from t he file.
+        a list that contains all words in read mode from the file.
         
     Examples
     --------
-    # word_list read_words_into_list('target_words.txt)
+    # word_list read_words_into_list('target_words.txt')
     # print(word_list)
     [aback, abase, abate, abbey, abbot]
     """
@@ -183,15 +183,30 @@ def random_target_word(random_word_list):
 
 # TODO: Display Greeting Function
 def show_greeting():
-    print("Welcome")
+    print("Welcome To the Game")
+    return
 
 # TODO: Display Instructions Function
 def show_instructions():
-    print("Instructions")
+    display_instruction = input('Would you like to see the instructions? (yes/no): ')
+    if display_instruction in ['yes', 'y', 'ye', 'yea', 'ya']:
+        print('\n How to Play The Game')
+        print('\n1. You have a limited amount of guesses to find the targeted word.')
+        print('\n2. Each guess must be a valid word of the 5 lettered words')
+        print('\n3. After each guess, you will see a display score/clure:')
+        print('\n   X = Correct letter in correct position.')
+        print('\n   ? = Correct letter in wrong position.')
+        print('\n   - = incorrect letter')
+    else:
+        print('\nSkipping instructions.\n ')
+    print('Game Starting')
+    return
 
 # TODO: Any Optional Additional Functions 
-
+# i guess there is a play button but it baked into the play_game() itself.
+# there is also a replay function baked into the loop.
 # TODO: Play Game Function
+import sys
 def play_game():
     """ 
     
@@ -201,14 +216,61 @@ def play_game():
     
     Returns:
     -------
-    None
-        
-    Examples
+    None    
     --------
     # play_game()
     * Play The Game
     """
-    print('Play Game')
+    
+    print('Play Game?')
+    start = input('Enter any key to play the game or "Q" to quit:')
+    if start in ['q', 'Q']:
+        print('Goodbye!')
+        sys.exit()
+        
+    else:
+        show_greeting()
+    username = input('Enter your username: ')
+    print('Hello, ', username.title()  )
+    show_instructions()
+
+    
+    while True:
+        max_guesses = 6
+        target_word_list = 'target_words.txt'
+        target_words = read_words_into_list(target_word_list)
+        all_words_list = 'all_words.txt'
+        all_words = read_words_into_list(all_words_list)
+        target_words = random_target_word(target_words)
+        for attempt in range(1, max_guesses + 1):
+            while True:
+                guess = input(f'Attempt {attempt}/{max_guesses}:').lower()
+                if len(guess) != 5:
+                    print('Invalid guess. Word must be 5 letters long.')
+                    continue
+                if guess not in all_words:
+                    print('Invalid guess: This word is invalid')
+                    continue
+                break
+            if guess == target_words:
+                print(f'Congratulation, {username.title()} have guessed the correct word.')
+                break
+
+            score = score_guess(guess, target_words)
+            display_score(score, guess)
+        else:
+            print(f'Game over! {username.title()}... should of guessed the word {target_words}.')
+        play_again = input("\nDo you want to play again? (yes/no): ").lower()
+        if play_again not in ['yes', 'y']:
+            print(f"\nGoodbye {username.title()}!")
+            break
+        print("\nStarting a new game...\n")
+
+        
+   
+    
+    
+        
 
 #TODO: Testing Function (Test Game)
 def test_game():
@@ -255,11 +317,11 @@ def test_game():
     ## Arrange
     target_word_filename = "target_words.txt"
     ## Act
-    target_word_list = read_words_into_list(target_word_filename)
+    target_word_list_test = read_words_into_list(target_word_filename)
     ## Assert
     # TODO: Create the statement to show the last 5 words and check that they are correct
     ## Assert
-    print("Got:", target_word_list[:5], "Expected:", ['aback', 'abase', 'abate', 'abbey', 'abbot'])
+    print("Got:", target_word_list_test[:5], "Expected:", ['aback', 'abase', 'abate', 'abbey', 'abbot'])
 
     # Test Case 6
     # TODO: Set list of words to ["apple", "banana", "cherry"]
