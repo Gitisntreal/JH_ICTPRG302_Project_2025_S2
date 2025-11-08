@@ -208,7 +208,7 @@ def play_game():
     # play_game()
     * Play The Game
     """
-print('Play Game')
+    print('Play Game')
 
 #TODO: Testing Function (Test Game)
 def test_game():
