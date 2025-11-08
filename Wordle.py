@@ -7,12 +7,14 @@
 # Lecturer: Chris
 
 # TODO: Add Import statements (if needed)
-
+DEBUG = True
 # Variables and Constants
 # TODO: Define Constants
 # definition: it is a value in which does not change, where they stay the same throughout the program
+
 # TODO: Define Variables 
 # definition: it is a named container/ placeholder that holds data into the named container in which the program use to recall to process the stored data.
+
 # Application Functions
 # TODO: Score Guess Function
 # Jason Huynh 20134959 - 5/11/2025
@@ -78,7 +80,7 @@ def display_score(score, word_guess):
    
     Examples
     --------
-    # display_score([2, 0, 1, 1, 2], 'aback)
+    # display_score([2, 0, 1, 1, 2], 'aback')
     # X-??X
     # A B A C K
     """
@@ -190,64 +192,86 @@ def show_instructions():
 # TODO: Any Optional Additional Functions 
 
 # TODO: Play Game Function
+def play_game():
+    """ 
+    
+  Arguments
+    ---------
+    None
+    
+    Returns:
+    -------
+    None
+        
+    Examples
+    --------
+    # play_game()
+    * Play The Game
+    """
+print('Play Game')
 
 #TODO: Testing Function (Test Game)
-# Test Case 1
-## Arrange 
-guess_word = 'hello'
-target_word = 'train'
-## Act
-score = score_guess(guess_word, target_word)
-## Assert
-print('Score:', score, 'Expected:', [0, 0, 0, 0, 0])
+def test_game():
+    # Test Case 1
+    ## Arrange 
+    guess_word = 'hello'
+    target_word = 'train'
+    ## Act
+    score = score_guess(guess_word, target_word)
+    ## Assert
+    print('Score:', score, 'Expected:', [0, 0, 0, 0, 0])
 
-# Test Case 2
-## Arrange 
-guess_word = 'hello'
-target_word = 'hello'
-## Act
-score = score_guess(guess_word, target_word)
-## Assert
-print('Score:', score, 'Expected:', [2, 2, 2, 2, 2])
+    # Test Case 2
+    ## Arrange 
+    guess_word = 'hello'
+    target_word = 'hello'
+    ## Act
+    score = score_guess(guess_word, target_word)
+    ## Assert
+    print('Score:', score, 'Expected:', [2, 2, 2, 2, 2])
 
-# Test Case 3
-## Arrange 
-# TODO: set guess word to "world"
-guess_word = 'world'
-# TODO: set target word to "hello"
-target_word = 'hello'
-## Act
-# TODO:  set score to score guess (guess word and target word)
-score = score_guess(guess_word, target_word)
-## Assert
-# TODO: display the score
-print('Score:', score, 'Expected:', [2, 2, 2, 2, 2])
+    # Test Case 3
+    ## Arrange 
+    # TODO: set guess word to "world"
+    guess_word = 'world'
+    # TODO: set target word to "hello"
+    target_word = 'hello'
+    ## Act
+    # TODO:  set score to score guess (guess word and target word)
+    score = score_guess(guess_word, target_word)
+    ## Assert
+    # TODO: display the score
+    print('Score:', score, 'Expected:', [2, 2, 2, 2, 2])
 
-# Test Case 4
-## Arrange
-all_word_filename = "all_words.txt"
-## Act
-all_word_list = read_words_into_list(all_word_filename)
-## Assert
-print("Got:", all_word_list[:5], "Expected:", ['aahed', 'aalii', 'aargh', 'aarti', 'abaca'])
+    # Test Case 4
+    ## Arrange
+    all_word_filename = "all_words.txt"
+    ## Act
+    all_word_list = read_words_into_list(all_word_filename)
+    ## Assert
+    print("Got:", all_word_list[:5], "Expected:", ['aahed', 'aalii', 'aargh', 'aarti', 'abaca'])
 
-# Test Case 5
-## Arrange
-target_word_filename = "target_words.txt"
-## Act
-target_word_list = read_words_into_list(target_word_filename)
-## Assert
-#TODO: Create the statement to show the last 5 words and check that they are correct
-## Assert
-print("Got:", target_word_list[:5], "Expected:", ['aback', 'abase', 'abate', 'abbey', 'abbot'])
+    # Test Case 5
+    ## Arrange
+    target_word_filename = "target_words.txt"
+    ## Act
+    target_word_list = read_words_into_list(target_word_filename)
+    ## Assert
+    # TODO: Create the statement to show the last 5 words and check that they are correct
+    ## Assert
+    print("Got:", target_word_list[:5], "Expected:", ['aback', 'abase', 'abate', 'abbey', 'abbot'])
 
-# Test Case 6
-# TODO: Set list of words to ["apple", "banana", "cherry"]
-testingrandom_words = ['apple', 'banana', 'cherry']
-for word_count in range(5):
+    # Test Case 6
+    # TODO: Set list of words to ["apple", "banana", "cherry"]
+    testingrandom_words = ['apple', 'banana', 'cherry']
+    for word_count in range(5):
     # TODO: Call random word with the list of words
-    testing_target_word = random_target_word(testingrandom_words)
+        testing_target_word = random_target_word(testingrandom_words)
     # TODO: Display the randomly selected word
-    print('Random targetted words:', testing_target_word)
+        print('Random targetted words:', testing_target_word)
 
 #TODO: Main Program
+if DEBUG:
+    test_game()
+else 
+    play_game()
