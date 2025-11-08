@@ -87,7 +87,7 @@ def display_score(score, word_guess):
     score_output = ''
     word_output = ''
     
-    for count in range(len(score))
+    for count in range(len(score)):
          if score[count] == 0:
              score_output += '-'
          elif score[count] == 1:
@@ -273,5 +273,5 @@ def test_game():
 #TODO: Main Program
 if DEBUG:
     test_game()
-else 
+else: 
     play_game()
