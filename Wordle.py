@@ -10,9 +10,9 @@
 
 # Variables and Constants
 # TODO: Define Constants
-
+# definition: it is a value in which does not change, where they stay the same throughout the program
 # TODO: Define Variables 
-
+# definition: it is a named container/ placeholder that holds data into the named container in which the program use to recall to process the stored data.
 # Application Functions
 # TODO: Score Guess Function
 # Jason Huynh 20134959 - 5/11/2025
@@ -60,6 +60,138 @@ def score_guess(guess, target):
             target_letter[target_letter.index(guess[i])] = None
     return score
 
+# Human friendly score display
+def display_score(score, word_guess):
+    """ 
+    Display a human friendly score of the guesses using the score list.
+   Arguments
+    ---------
+    score : list 
+        a list of integers that represts the result of each letter in the guessed word.
+    word_guess : str
+        words guessed by the player.
+    
+    Returns:
+    -------
+    None
+        A function in which prints the score and guess word to the console.
+   
+    Examples
+    --------
+    # display_score([2, 0, 1, 1, 2], 'aback)
+    # X-??X
+    # A B A C K
+    """
+    score_output = ''
+    word_output = ''
+    
+    for count in range(len(score))
+         if score[count] == 0:
+             score_output += '-'
+         elif score[count] == 1:
+             score_output += '?'  
+         elif score[count] == 2:
+             score_output += 'x'
+
+    # TODO: For count in range 1 to length of score:
+    for count in range(len(score)):
+        word_output += word_guess[count]
+        word_output += ' '
+
+    print(score_output)
+    print(word_output)
+
+# Pseudocode - defining an algorithm for scoring
+"""
+Start:
+    Get Guess and Target Words
+    Initialise Score as a list of 0s of length of Target Word
+    For position in length of Target Word:
+        If letter at position in Guess word equals letter at position in Target word:
+            Set score at position to 2
+        :End if
+    :End for
+    For position in length of Target Word:
+    if score at position not equal to 2:
+        if letter at position in Guess is in Target Word and Target Word count of that letter is greater than number of times letter has already been scored as 2 or 1:
+            set score at position to 1
+        End If
+    End If
+End For
+    Return Score
+:End 
+"""
+
+# TODO: Read File Into Word List Function
+def read_words_into_list(filename):
+    """ Reads the target words file and store them in a list.
+  Arguments
+    ---------
+    filename : str
+    the name/path of text file in which contains word to be read.
+    
+    Returns:
+    -------
+    list
+        a list that contains all words in read mode from t he file.
+        
+    Examples
+    --------
+    # word_list read_words_into_list('target_words.txt)
+    # print(word_list)
+    [aback, abase, abate, abbey, abbot]
+    """
+    word_list = []
+    with open(filename, 'r') as file:
+        for line in file:
+            word = line.strip()
+            word_list.append(word)
+    return word_list
+
+#Creating a random word fucntion
+import random
+def random_target_word(random_word_list):
+    """ 
+    select a random word within the targeted word list variable and return it.
+  Arguments
+    ---------
+    word_;ist : list
+        A list of containing all the targetted word taht they player must guess.
+    
+    Returns:
+    -------
+    str
+        a randomly selected word from the target words list.
+
+        
+    Examples
+    --------
+    # target_words = ['aback', 'abase', 'abate', 'abbey', 'abbot']
+    # random_word(words)
+    output: 'abase'
+    """
+    # TODO: Count the words in the word list
+    word_count = len(random_word_list)
+    # TODO: Select a random number between 0 and the number of words in the list
+    random_list = random.randint(0, word_count - 1)
+    # TODO: Return the word at the random number's position
+    return random_word_list[random_list]
+
+
+
+# TODO: Display Greeting Function
+def show_greeting():
+    print("Welcome")
+
+# TODO: Display Instructions Function
+def show_instructions():
+    print("Instructions")
+
+# TODO: Any Optional Additional Functions 
+
+# TODO: Play Game Function
+
+#TODO: Testing Function (Test Game)
 # Test Case 1
 ## Arrange 
 guess_word = 'hello'
@@ -91,55 +223,6 @@ score = score_guess(guess_word, target_word)
 # TODO: display the score
 print('Score:', score, 'Expected:', [2, 2, 2, 2, 2])
 
-
-# Pseudocode - defining an algorithm for scoring
-"""
-Start:
-    Get Guess and Target Words
-    Initialise Score as a list of 0s of length of Target Word
-    For position in length of Target Word:
-        If letter at position in Guess word equals letter at position in Target word:
-            Set score at position to 2
-        :End if
-    :End for
-    For position in length of Target Word:
-    if score at position not equal to 2:
-        if letter at position in Guess is in Target Word and Target Word count of that letter is greater than number of times letter has already been scored as 2 or 1:
-            set score at position to 1
-        End If
-    End If
-End For
-    Return Score
-:End
-"""
-
-
-# TODO: Read File Into Word List Function
-def read_words_into_list(filename):
-    """ Reads the target words file and store them in a list.
-  Arguments
-    ---------
-    filename : str
-    the name/path of text file in which contains word to be read.
-    
-    Returns:
-    -------
-    list
-        a list that contains all words in read mode from t he file.
-        
-    Examples
-    --------
-    # word_list read_words_into_list('target_words.txt)
-    # print(word_list)
-    [aback, abase, abate, abbey, abbot]
-    """
-    word_list = []
-    with open(filename, 'r') as file:
-        for line in file:
-            word = line.strip()
-            word_list.append(word)
-    return word_list
-
 # Test Case 4
 ## Arrange
 all_word_filename = "all_words.txt"
@@ -158,58 +241,13 @@ target_word_list = read_words_into_list(target_word_filename)
 ## Assert
 print("Got:", target_word_list[:5], "Expected:", ['aback', 'abase', 'abate', 'abbey', 'abbot'])
 
-#Creating a random word fucntion
-import random
-def random_target_word(random_word_list):
-    """ 
-    select a random word within the targeted word list variable and return it.
-  Arguments
-    ---------
-    word_;ist : list
-        A list of containing all the targetted word taht they player must guess.
-    
-    Returns:
-    -------
-    str
-        a randomly selected word from the target words list.
-
-        
-    Examples
-    --------
-    # target_words = ['aback', 'abase', 'abate', 'abbey', 'abbot']
-    # random_word(words)
-    output: 'abase'
-    """
-    # TODO: Count the words in the word list
-    word_count = len(random_word_list)
-    # TODO: Select a random number between 0 and the number of words in the list
-    random_list = random.randint(0, word_count - 1)
-    # TODO: Return the word at the random number's position
-    return random_word_list[random_list]
-
 # Test Case 6
 # TODO: Set list of words to ["apple", "banana", "cherry"]
-words = ['apple', 'banana', 'cherry']
+testingrandom_words = ['apple', 'banana', 'cherry']
 for word_count in range(5):
     # TODO: Call random word with the list of words
-    targetted_word = random_target_word(words)
+    testing_target_word = random_target_word(testingrandom_words)
     # TODO: Display the randomly selected word
-    print('Random targetted words:', targetted_word)
- 
-    
-    
-# TODO: Display Greeting Function
-def show_greeting():
-    print("Welcome")
-
-# TODO: Display Instructions Function
-def show_instructions():
-    print("Instructions")
-
-# TODO: Any Optional Additional Functions 
-
-# TODO: Play Game Function
-
-#TODO: Testing Function
+    print('Random targetted words:', testing_target_word)
 
 #TODO: Main Program
