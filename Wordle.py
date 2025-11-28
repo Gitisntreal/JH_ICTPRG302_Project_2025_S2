@@ -52,7 +52,7 @@ def score_guess(guess: str, target: str) -> list[int]:
         """
     score = [0] * len(target)
     target_letter = list(target)
-    for i, (g_char, t_char) in enumerate (zip(guess, target))
+    for i, (g_char, t_char) in enumerate (zip(guess, target)):
         if g_char == t_char:
             score[i] = 2
             target_letter[i] = None
@@ -157,7 +157,8 @@ def read_words_into_list(filename):
 
 #Creating a random word fucntion
 import random
-def random_target_word(random_word_list):
+from typing import Sequence
+def random_target_word(words: Sequence[str]) -> str:
     """ 
     select a random word within the targeted word list variable and return it.
   Arguments
@@ -177,13 +178,16 @@ def random_target_word(random_word_list):
     # random_word(words)
     output: 'abase'
     """
+    """
     # TODO: Count the words in the word list
     word_count = len(random_word_list)
     # TODO: Select a random number between 0 and the number of words in the list
     random_list = random.randint(0, word_count - 1)
     # TODO: Return the word at the random number's position
     return random_word_list[random_list]
-
+    # Again I don't think i need this anymore but leaving it for the assignment.
+    """
+    return random.choice(words)
 
 
 # TODO: Display Greeting Function
@@ -208,8 +212,10 @@ def show_instructions():
     return
 
 # TODO: Any Optional Additional Functions 
-# i guess there is a play button but it baked into the play_game() itself.
-# there is also a replay function baked into the loop.
+
+
+
+
 # TODO: Play Game Function
 import sys
 def play_game():
