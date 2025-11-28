@@ -18,7 +18,7 @@ DEBUG = False
 # Application Functions
 # TODO: Score Guess Function
 # Jason Huynh 20134959 - 5/11/2025
-def score_guess(guess, target):
+def score_guess(guess: str, target: str) -> list[int]:
     """ This function is used to detect the letters within guess word (inputted by player).
     At base it will give a score 0 to all the letters then set the score of 2 if the letter is in the correct position of the target word.
     If the score is still set at 0 and the guess letter is within the target word then it will set a score 1.
@@ -52,15 +52,16 @@ def score_guess(guess, target):
         """
     score = [0] * len(target)
     target_letter = list(target)
-    for i in range(len(target)):
-        if guess[i] == target[i]:
+    for i, (g_char, t_char) in enumerate (zip(guess, target)):
+        if g_char == t_char:
             score[i] = 2
             target_letter[i] = None
-    for i in range(len(target)):
-        if score[i] == 0 and guess[i] in target_letter:
+    for i, g_char in enumerate(guess):
+        if score[i] == 0 and g_char in target_letter:
             score[i] = 1
-            target_letter[target_letter.index(guess[i])] = None
+            target_letter[target_letter.index(g_char)] = None
     return score
+# ok what this new code does is the same thing as the previous code but instead it has been refractured where it is less index heavy
 
 # Human friendly score display
 def display_score(score, word_guess):
@@ -89,11 +90,11 @@ def display_score(score, word_guess):
     
     for count in range(len(score)):
          if score[count] == 0:
-             score_output += '-'
+             score_output += ' - '
          elif score[count] == 1:
-             score_output += '?'  
+             score_output += ' ? '  
          elif score[count] == 2:
-             score_output += 'x'
+             score_output += ' x '
 
     # TODO: For count in range 1 to length of score:
     for count in range(len(score)):
