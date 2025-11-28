@@ -52,7 +52,7 @@ def score_guess(guess: str, target: str) -> list[int]:
         """
     score = [0] * len(target)
     target_letter = list(target)
-    for i, (g_char, t_char) in enumerate (zip(guess, target)):
+    for i, (g_char, t_char) in enumerate (zip(guess, target))
         if g_char == t_char:
             score[i] = 2
             target_letter[i] = None
@@ -61,7 +61,7 @@ def score_guess(guess: str, target: str) -> list[int]:
             score[i] = 1
             target_letter[target_letter.index(g_char)] = None
     return score
-# ok what this new code does is the same thing as the previous code but instead it has been refractured where it is less index heavy
+# ok what this new code does is the same thing as the previous code but instead it has been improved where it is less index heavy 
 
 # Human friendly score display
 def display_score(score, word_guess):
@@ -85,9 +85,12 @@ def display_score(score, word_guess):
     # X-??X
     # A B A C K
     """
-    score_output = ''
-    word_output = ''
+    symbols = {0:' - ', 1:' ? ', 2:' X '}
+
+    score_output = ''.join(symbols[value] for value in score)
+    word_output = ''.join(word_guess)
     
+    """
     for count in range(len(score)):
          if score[count] == 0:
              score_output += ' - '
@@ -100,7 +103,8 @@ def display_score(score, word_guess):
     for count in range(len(score)):
         word_output += word_guess[count]
         word_output += ' '
-
+    # I dont think this is needed anymore but for assignment purpose I will leave it be.
+    """
     print(score_output)
     print(word_output)
 
