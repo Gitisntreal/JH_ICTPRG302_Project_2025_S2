@@ -193,6 +193,11 @@ def random_target_word(words: Sequence[str]) -> str:
 # TODO: Display Greeting Function
 def show_greeting():
     print("Welcome To the Game")
+    print('Play Game?')
+    start = input('Enter any key to play the game or "Q" to quit:')
+    if start in ['q', 'Q']:
+        print('Goodbye!')
+        sys.exit()
     return
 
 # TODO: Display Instructions Function
@@ -237,26 +242,9 @@ def valid_guesses(all_words: list[str]) -> str:
 
 # TODO: Play Game Function
 import sys
-def play_game():
-    """ 
-    
-  Arguments
-    ---------
-    None
-    
-    Returns:
-    -------
-    None    
-    --------
-    # play_game()
-    * Play The Game
-    """
-    
-    print('Play Game?')
-    start = input('Enter any key to play the game or "Q" to quit:')
-    if start in ['q', 'Q']:
-        print('Goodbye!')
-        sys.exit()
+def play_game() -> None:
+
+
         
     else:
         show_greeting()
