@@ -198,7 +198,8 @@ def show_greeting():
     if start in ['q', 'Q']:
         print('Goodbye!')
         sys.exit()
-    return
+    else:
+        return
 
 # TODO: Display Instructions Function
 def show_instructions():
@@ -239,19 +240,24 @@ def valid_guesses(all_words: list[str]) -> str:
             continue
         return guess
 
+def get_username() -> str:
+    """Just a way to get user for a username."""
+    while True:
+        username = input('Please enter your name: ').strip().title()
+        if username:
+            return username
+        print('A name cannot be empty. Please input a name!')
+
+
+
+
 
 # TODO: Play Game Function
 import sys
 def play_game() -> None:
-
-
-        
-    else:
-        show_greeting()
-    username = input('Enter your username: ')
-    print('Hello, ', username.title()  )
+    show_greeting()
+    username = get_username()
     show_instructions()
-
     
     while True:
         max_guesses = 6
