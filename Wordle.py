@@ -256,7 +256,37 @@ yes_answers = {'yes','ye','yea','y','ya'}
 def the_yes(answer: str) -> bool:
     return answer.strip().lower() in yes_answers
 
+def give_hint(target_word: str, revealed_positions:set[int]) -> int:
+    """ Used in the difficulty setting where if it is in easy mode players are allowed one revealed letter."""
+    avialable_indices = [i for i in range(len(target_word)) if i not in revealed_positions]
+    if not avialable_indices:
+        print('Only one hint per game.')
+        return -1
+    idx = random.choice(avialable_indices)
+    letter = target_word[idx]
+    print(f'hint: Letter {idx + 1}"{letter}".')
+    return idx
 
+def difficulty() -> bool:
+    """A way for the player to choose the difficulty."""
+    while True:
+        choice = input('Choose difficulty: Easy or Hard: ').strip().lower()
+        if choice in ('e', 'easy'):
+            print('Easy mode: 1 hint per game.')
+            return False
+        if choice in ('h','hard'):
+            print('Hard mode: No hints.')
+            return True
+        print('Please enter "e" for easy or "h" for hard.')
+
+def display_stats(username: str, total_games: int, wins: int) -> None:
+    """ Displays the stats of the game."""
+    print(f'\nFinal stats for {username.title()}:')
+    print(f'  Games played:{total_games}')
+    print(f'  Games won:{wins}')
+    if total_games > 0:
+        win_rate = (wins / total_games) * 100
+        print(f' Win rate: {win_rate:.1f}%')
 
 
 
@@ -270,20 +300,38 @@ def play_game() -> None:
     word_list = read_words_into_list('target_words.txt')
     all_words = read_words_into_list('all_words.txt')
     
+    if not word_list or not all_words:
+        print('Word lists could not load. Game broken... maybe go fix your game????')
+        return
+        
     total_games = 0
     wins = 0
 
     
     while True:
         total_games += 1
+        print(f'\n New game #{total_games}')
+        
+        false_hard_mode = difficulty()
         max_guesses = amount_of_guesses()
         target_word = random_target_word(word_list)
         
-        won_game = False
+        used_hint = False
+        revealed_positions: Set[int] = set()
+        guesses_this_game:List[str] = []
+        
+    
         for attempt in range(1, max_guesses + 1):
             print(f'\nAttempt {attempt}/{max_guesses}')
             guess = valid_guesses(all_words)
             
+            if guesses_this_game:
+                print('previous guesses: ')
+                for index, g in enumerate (guesses_this_game, start = 1):
+                    print(f'  {index}. {g}')
+                    
+            guesses_this_game.append(guess)
+                        
             if guess == target_word:
                 print(f'Congratulation, {username.title()} have guessed the correct word.')
                 won_game = True
@@ -292,20 +340,24 @@ def play_game() -> None:
             
             score = score_guess(guess, target_word)
             display_score(score, guess)
+            
+            if(not false_hard_mode) and (not used_hint):
+                ask_hint = input('Do you want a hint?(1 per game y/n): ')
+                if the_yes(ask_hint):
+                    idx = give_hint(target_word, revealed_positions)
+                    if idx != -1:
+                        revealed_positions.add(idx)
+                        used_hint = True
         
         else:
             print(f'Game over! {username.title()}... should of guessed the word {target_word}.')
         
-        print(f'\nGame won so far: {wins} win(s) out of {total_games} game(s).')
+        display_stats(username, total_games, wins)
         
         play_again = input("\nDo you want to play again? (yes/no): ").lower().strip()
         if not the_yes(play_again):
-            print(f'\nFinal stats for {username.title()}:')
-            print(f'  Games played:{total_games}')
-            print(f'  Games won:{wins}')
-            if total_games > 0:
-                win_rate = (wins / total_games) * 100
-                print(f' Win rate: {win_rate:.1f}%')
+            print('\nFinal Stats:')
+            display_stats(username, total_games, wins)
             print(f'\nGoodbye {username.title()}!')
             break
         print('\Starting a new game...\n')
