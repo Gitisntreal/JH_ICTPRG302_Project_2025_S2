@@ -231,7 +231,7 @@ def amount_of_guesses() -> int:
 
 def valid_guesses(all_words: list[str]) -> str:
     while True:
-        guess = input('What is your guess?: ').strip().lower()
+        guess = input('What is your guess?: ').strip()
         if len(guess) != 5:
             print('Invalid guess: Word must be 5 letters long!')
             continue
@@ -248,6 +248,10 @@ def get_username() -> str:
             return username
         print('A name cannot be empty. Please input a name!')
 
+yes_answers = {'yes','ye','yea','y','ya'}
+def the_yes(answer: str) -> bool:
+    return answer.strip().lower() in yes_answers
+
 
 
 
@@ -258,37 +262,32 @@ def play_game() -> None:
     show_greeting()
     username = get_username()
     show_instructions()
+
+    word_list = read_words_into_list('target_words.txt')
+    all_words = read_words_into_list('all_words.txt')
+    max_guesses = amount_of_guesses()
     
     while True:
-        max_guesses = 6
-        target_word_list = 'target_words.txt'
-        target_words = read_words_into_list(target_word_list)
-        all_words_list = 'all_words.txt'
-        all_words = read_words_into_list(all_words_list)
-        target_words = random_target_word(target_words)
+        target_word = random_target_word(word_list)
+
         for attempt in range(1, max_guesses + 1):
-            while True:
-                guess = input(f'Attempt {attempt}/{max_guesses}:').lower()
-                if len(guess) != 5:
-                    print('Invalid guess. Word must be 5 letters long.')
-                    continue
-                if guess not in all_words:
-                    print('Invalid guess: This word is invalid')
-                    continue
-                break
-            if guess == target_words:
+            print(f'\nAttempt {attempt}/{max_guesses}')
+            guess = valid_guesses(all_words)
+            
+            if guess == target_word:
                 print(f'Congratulation, {username.title()} have guessed the correct word.')
                 break
-
-            score = score_guess(guess, target_words)
+            score = score_guess(guess, target_word)
             display_score(score, guess)
         else:
-            print(f'Game over! {username.title()}... should of guessed the word {target_words}.')
-        play_again = input("\nDo you want to play again? (yes/no): ").lower()
-        if play_again not in ['yes', 'y']:
-            print(f"\nGoodbye {username.title()}!")
+            print(f'Game over! {username.title()}... should of guessed the word {target_word}.')
+            
+        play_again = input("\nDo you want to play again? (yes/no): ").lower().strip()
+        if not the_yes(play_again):
+            print(f'\nGoodbye {username.title()}!')
             break
-        print("\nStarting a new game...\n")
+        print('\Starting a new game...\n')
+
 
         
    
