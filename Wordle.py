@@ -128,9 +128,9 @@ End For
     Return Score
 :End 
 """
-
+from typing import List, Set
 # TODO: Read File Into Word List Function
-def read_words_into_list(filename):
+def read_words_into_list(filename: str) -> List[str]:
     """ Reads the target words file and store them in a list.
   Arguments
     ---------
@@ -148,12 +148,16 @@ def read_words_into_list(filename):
     # print(word_list)
     [aback, abase, abate, abbey, abbot]
     """
-    word_list = []
-    with open(filename, 'r') as file:
-        for line in file:
-            word = line.strip()
-            word_list.append(word)
-    return word_list
+    words: List[str] = []
+    try:
+        with open(filename, 'r') as file:
+            for line in file:
+                word = line.strip()
+                if word:
+                    words.append(word.upper())
+    except FileNotFoundError:
+        print(f'Error: Could not find file "{filename}".')
+    return words
 
 #Creating a random word fucntion
 import random
@@ -231,7 +235,7 @@ def amount_of_guesses() -> int:
 
 def valid_guesses(all_words: list[str]) -> str:
     while True:
-        guess = input('What is your guess?: ').strip().lower()
+        guess = input('What is your guess?: ').strip().upper()
         if len(guess) != 5:
             print('Invalid guess: Word must be 5 letters long!')
             continue
