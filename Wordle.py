@@ -210,9 +210,10 @@ def show_instructions():
     display_instruction = input('Would you like to see the instructions? (yes/no): ')
     if display_instruction in ['yes', 'y', 'ye', 'yea', 'ya']:
         print('\n How to Play The Game')
-        print('\n1. You have a limited amount of guesses to find the targeted word.')
+        print('\n1. You can choose the amount of guesses to find the targetted word.')
         print('\n2. Each guess must be a valid word of the 5 lettered words')
-        print('\n3. After each guess, you will see a display score/clure:')
+        print('\n3. After each guess, you will see a display score/clue:')
+        print('\n4. There is an easy and hard mode, only difference is that easy mode gets a hint s system.')
         print('\n   X = Correct letter in correct position.')
         print('\n   ? = Correct letter in wrong position.')
         print('\n   - = incorrect letter')
