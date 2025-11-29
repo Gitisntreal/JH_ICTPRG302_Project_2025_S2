@@ -212,8 +212,27 @@ def show_instructions():
     return
 
 # TODO: Any Optional Additional Functions 
+def amount_of_guesses() -> int:
+    while True:
+        try:
+            max_guesses = int(input('How many guesses do you want (1-10)?'))
+            if 1 <= max_guesses <=10:
+                return max_guesses
+            print('Please enter a number that is between 1 and 10.')
+        except ValueError:
+            print('Please enter in a number only!')
 
 
+def valid_guesses(all_words: list[str]) -> str:
+    while True:
+        guess = input('What is your guess?: ').strip().lower()
+        if len(guess) != 5:
+            print('Invalid guess: Word must be 5 letters long!')
+            continue
+        if guess not in all_words:
+            print('Invalid guess: This word is not in the word list.')
+            continue
+        return guess
 
 
 # TODO: Play Game Function
