@@ -231,7 +231,7 @@ def amount_of_guesses() -> int:
 
 def valid_guesses(all_words: list[str]) -> str:
     while True:
-        guess = input('What is your guess?: ').strip()
+        guess = input('What is your guess?: ').strip().lower()
         if len(guess) != 5:
             print('Invalid guess: Word must be 5 letters long!')
             continue
@@ -265,25 +265,43 @@ def play_game() -> None:
 
     word_list = read_words_into_list('target_words.txt')
     all_words = read_words_into_list('all_words.txt')
-    max_guesses = amount_of_guesses()
+    
+    total_games = 0
+    wins = 0
+
     
     while True:
+        total_games += 1
+        max_guesses = amount_of_guesses()
         target_word = random_target_word(word_list)
-
+        
+        won_game = False
         for attempt in range(1, max_guesses + 1):
             print(f'\nAttempt {attempt}/{max_guesses}')
             guess = valid_guesses(all_words)
             
             if guess == target_word:
                 print(f'Congratulation, {username.title()} have guessed the correct word.')
+                won_game = True
+                wins += 1
                 break
+            
             score = score_guess(guess, target_word)
             display_score(score, guess)
+        
         else:
             print(f'Game over! {username.title()}... should of guessed the word {target_word}.')
-            
+        
+        print(f'\nGame won so far: {wins} win(s) out of {total_games} game(s).')
+        
         play_again = input("\nDo you want to play again? (yes/no): ").lower().strip()
         if not the_yes(play_again):
+            print(f'\nFinal stats for {username.title()}:')
+            print(f'  Games played:{total_games}')
+            print(f'  Games won:{wins}')
+            if total_games > 0:
+                win_rate = (wins / total_games) * 100
+                print(f' Win rate: {win_rate:.1f}%')
             print(f'\nGoodbye {username.title()}!')
             break
         print('\Starting a new game...\n')
